@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMOYO · Japanese Milk Tea & Desserts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff5d8f;--deep:#e0336d;--bg:#ffeef4;--card:#fff8fb;--ink:#7a2346;--text:#6b3350;--mut:#a77089;--lav:#cdbcff;--line:#f7c6d8;
+--head:"Baloo 2","Trebuchet MS",system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100vh}
+body{color:var(--text);font:400 16px/1.6 var(--body);
+background:radial-gradient(700px 400px at 90% 0,#ffd0e1 0,transparent 70%),radial-gradient(600px 400px at 0 100%,#ffe6b8 0,transparent 65%),var(--bg);overflow-x:hidden}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.landing{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 22px;position:relative}
+.petal{position:absolute;font-size:28px;opacity:.7;animation:fl 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes fl{to{transform:translateY(14px) rotate(14deg)}}
+.logo{width:120px;height:120px;object-fit:contain;border-radius:50%;box-shadow:0 8px 24px rgba(224,51,109,.25);background:#fff;margin-bottom:14px}
+.brand{font:800 46px/1 var(--head);color:var(--pink);-webkit-text-stroke:1.5px var(--deep);letter-spacing:.02em;margin:0}
+.sub{font-size:13px;color:var(--ink);font-weight:700;margin:4px 0 18px}
+.tagline{font:700 20px var(--head);color:var(--deep);margin:0 0 18px}
+.headline{font:800 clamp(26px,4.5vw,44px)/1.1 var(--head);color:var(--ink);margin:0 0 16px;max-width:720px}
+.intro{max-width:620px;color:var(--text);font-size:15.5px;margin:0 0 24px}
+.visuals{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:10px 0 26px}
+.visuals img{width:120px;height:120px;object-fit:cover;border-radius:16px;box-shadow:0 6px 16px rgba(224,51,109,.18);background:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--pink);color:#fff;border:0;border-radius:99px;padding:16px 40px;font:700 19px var(--head);cursor:pointer;box-shadow:0 5px 0 var(--deep);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--deep)}
+.orig{color:var(--ink);font-size:14px;font-weight:700;margin-top:18px}
+@media(max-width:640px){.logo{width:96px;height:96px}.brand{font-size:36px}.visuals img{width:90px;height:90px}}
+</style>
+</head>
+<body>
+<div class="landing">
+ <span class="petal" style="left:6%;top:12%">🌸</span>
+ <span class="petal" style="right:8%;top:18%;animation-delay:1.2s">🌸</span>
+ <span class="petal" style="left:12%;bottom:14%;animation-delay:2s">🍓</span>
+ <span class="petal" style="right:10%;bottom:10%;animation-delay:.6s">🧋</span>
+ <img class="logo" src="momoyo_logo.jpg" alt="MOMOYO Logo" onerror="this.style.display='none'">
+ <h1 class="brand">MOMOYO</h1>
+ <div class="sub">Japanese Milk Tea &amp; Desserts</div>
+ <p class="tagline">Delight In Every Bite, Joy In Every Vibe</p>
+ <h2 class="headline">Welcome to MOMOYO</h2>
+ <p class="intro">Happiness in every cup and bite. Discover our handcrafted milk teas, fruity teas, creamy ice creams, fluffy waffles, and sweet pastries — made fresh with love, originally from Indonesia.</p>
+ <div class="visuals">
+  <img src="momo-ice-cream-original.webp" alt="Ice cream" onerror="this.style.display='none'">
+  <img src="super-milk-tea.webp" alt="Milk tea" onerror="this.style.display='none'">
+  <img src="yoflip-mango.webp" alt="YoFlip" onerror="this.style.display='none'">
+  <img src="egg-waffle-original.webp" alt="Egg waffle" onerror="this.style.display='none'">
+  <img src="donut-strawberry.webp" alt="Donut" onerror="this.style.display='none'">
+ </div>
+ <a class="btn" href="index.html#menu">Explore Menu →</a>
+ <p class="orig">📍 Originally from Indonesia 🇮🇩</p>
+</div>
+</body>
+</html>
