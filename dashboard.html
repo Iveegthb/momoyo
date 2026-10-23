@@ -201,7 +201,7 @@ nav.main a.on{background:var(--pink);color:#fff;box-shadow:0 4px 0 var(--deep)}
 </div></section>
 
 <section class="page" id="stores"><div class="wrap">
- <div class="ttl"><h1>Store Locations</h1><p>Pick up your order from one of our branches.</p></div>
+ <div class="ttl"><h1>Store Locations</h1><p>Pick up your order from our Sandawa Branch.</p></div>
  <div class="stores" id="slist"></div>
 </div></section>
 
@@ -329,10 +329,7 @@ const PRODUCTS=[
  {n:'Donut Chocolate Dirty',p:99,cat:'pas',img:'donut-chocolate-dirty.webp'}
 ];
 const STORES=[
- {id:'lanang',n:'SM Lanang Premier',a:'J.P. Laurel Ave, Lanang, Davao City',h:'10:00 AM – 09:00 PM',c:'#ffb0cb'},
- {id:'abreeza',n:'Abreeza Mall',a:'J.P. Laurel Ave, Bajada, Davao City',h:'10:00 AM – 09:00 PM',c:'#d9ccff'},
- {id:'gaisano',n:'Gaisano Mall of Davao',a:'J.P. Laurel Ave, Bajada, Davao City',h:'10:00 AM – 09:00 PM',c:'#ffe6a8'},
- {id:'smdavao',n:'SM City Davao',a:'Quimpo Blvd, Ecoland, Davao City',h:'10:00 AM – 09:00 PM',c:'#bfe3f5'}
+ {id:'sandawa',n:'Sandawa Branch',a:'Sandawa Branch, Davao City, Philippines',h:'10:00 AM – 09:00 PM',c:'#ffb0cb'}
 ];
 const PAY=[['gcash','GCash','Pay securely with your GCash account.',1],['maya','Maya','Pay with Maya for a fast and easy checkout.',1],['card','Credit / Debit Card','Visa, Mastercard, JCB (via payment gateway).',1],['cash','Cash on Pickup','Pay at the store when you collect your order.',0]];
 
@@ -349,7 +346,7 @@ const nice=s=>new Date(s+'T00:00').toLocaleDateString('en-US',{month:'short',day
 /* ============ state ============ */
 let cart=load('momoyo-cart',[]).filter(l=>l&&typeof l.n==='string'&&l.p>0&&l.q>0);
 let orders=load('momoyo-orders',[]);
-const CO={name:'',phone:'',store:'lanang',date:iso(new Date()),time:'',note:'',pay:'cash'};
+const CO={name:'',phone:'',store:'sandawa',date:iso(new Date()),time:'',note:'',pay:'cash'};
 let cat='ice',query='',lastOrder=null;
 const total=()=>cart.reduce((s,l)=>s+l.p*l.q,0);
 
