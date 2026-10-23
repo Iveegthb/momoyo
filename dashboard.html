@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMOYO · Japanese Milk Tea & Desserts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff5d8f;--deep:#e0336d;--bg:#ffeef4;--card:#fff8fb;--ink:#7a2346;--text:#6b3350;--mut:#a77089;--lav:#cdbcff;--line:#f7c6d8;--ok:#2f9e63;
+--head:"Baloo 2","Trebuchet MS",system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);font:400 16px/1.6 var(--body);min-height:100vh;
+background:radial-gradient(700px 400px at 90% 0,#ffd0e1 0,transparent 70%),radial-gradient(600px 400px at 0 100%,#ffe6b8 0,transparent 65%),var(--bg);padding-bottom:40px;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px;position:relative}
+.petal{position:absolute;font-size:26px;opacity:.7;animation:fl 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes fl{to{transform:translateY(14px) rotate(14deg)}}
+header.top{position:sticky;top:0;z-index:30;background:rgba(255,238,244,.9);backdrop-filter:blur(8px);border-bottom:2px solid #ffd3e2}
+header.top .wrap{display:flex;align-items:center;gap:20px;height:78px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:50px;height:50px;object-fit:contain;border-radius:50%}
+.brand b{display:block;font:800 30px/1 var(--head);color:var(--pink);-webkit-text-stroke:1px var(--deep);letter-spacing:.02em}
+.brand small{display:block;font-size:11.5px;color:var(--ink);font-weight:700}
+nav.main{display:flex;gap:6px;margin-left:auto}
+nav.main a{padding:7px 18px;border-radius:99px;font-weight:700;font-size:14.5px;color:var(--ink)}
+nav.main a:hover{background:#ffd3e2}
+nav.main a.on{background:var(--pink);color:#fff;box-shadow:0 4px 0 var(--deep)}
+.tools{display:flex;gap:6px}
+.tools button{position:relative;width:42px;height:42px;border-radius:50%;border:0;background:transparent;cursor:pointer;font-size:20px}
+.tools button:hover{background:#ffd3e2}
+.cnt{position:absolute;top:0;right:0;min-width:19px;height:19px;border-radius:99px;background:var(--pink);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;border:2px solid #fff}
+#sbar{display:none;padding:10px 0;border-bottom:2px solid #ffd3e2;background:#fff5f9}
+#sbar.on{display:block}
+#sbar input{width:100%;padding:11px 18px;border-radius:99px;border:2px solid var(--line);background:#fff}
+.page{display:none;padding-bottom:70px;animation:in .35s ease}
+.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--pink);color:#fff;border:0;border-radius:99px;padding:13px 32px;font:700 17px var(--head);cursor:pointer;box-shadow:0 5px 0 var(--deep);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--deep)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.sm{padding:6px 12px;font-size:13px;box-shadow:0 3px 0 var(--deep);width:100%}
+.btn.ghost{background:#fff;color:var(--deep);border:2px solid var(--pink);box-shadow:none}
+.btn.full{width:100%}
+.ttl{text-align:center;padding:30px 0 8px}
+.ttl h1{margin:0;font:800 clamp(38px,6vw,58px)/1 var(--head);color:var(--pink);-webkit-text-stroke:1.5px var(--deep);letter-spacing:.02em}
+.ttl p{margin:6px 0 0;color:var(--ink);font-weight:600}
+/* home */
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;padding:34px 0 10px}
+.hero h1{margin:0 0 6px;font:800 clamp(36px,5.2vw,62px)/1.02 var(--head);color:var(--pink);-webkit-text-stroke:1.5px var(--deep);transform:rotate(-4deg);transform-origin:left}
+.hero h1 span{color:#ff8a3d;-webkit-text-stroke:1.5px #d9651a}
+.tag{display:inline-block;background:linear-gradient(90deg,#fff0c9,#ffe3ec);padding:6px 18px;border-radius:99px;font:700 17px var(--head);color:var(--ink);transform:rotate(-4deg);margin:28px 0 4px}
+.orig{color:var(--ink);font-size:14.5px;font-weight:700;margin:0 0 22px}
+.art{position:relative;height:400px;display:flex;align-items:center;justify-content:center}
+.art img{max-width:100%;height:380px;object-fit:contain;border-radius:20px;box-shadow:0 10px 30px rgba(224,51,109,.2);background:#fff}
+.badge{position:absolute;right:0;bottom:4px;background:#fff;border:3px solid #ffd3e2;border-radius:50%;width:116px;height:116px;display:grid;place-items:center;text-align:center;font:800 14px/1.15 var(--head);color:var(--deep);transform:rotate(-10deg)}
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.perk{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;color:var(--ink);line-height:1.25}
+.perk i,.vals i{width:48px;height:48px;border-radius:50%;background:#ffd3e2;display:grid;place-items:center;font-style:normal;font-size:22px;flex:none}
+/* menu */
+.mgrid{display:grid;grid-template-columns:240px 1fr;gap:28px;margin-top:18px}
+.side{background:rgba(255,255,255,.6);border-radius:22px;padding:12px;align-self:start;display:grid;gap:2px}
+.side button{display:flex;align-items:center;gap:12px;background:none;border:0;border-radius:99px;padding:9px 14px;cursor:pointer;text-align:left;font-weight:700;font-size:14.5px;color:var(--ink)}
+.side button:hover{background:#ffe3ec}
+.side button.on{background:var(--pink);color:#fff;box-shadow:0 3px 0 var(--deep)}
+.side button span{font-size:18px;width:24px;text-align:center}
+.mh h2{margin:0 0 14px;font:800 30px var(--head);color:var(--pink)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.prod{background:var(--card);border:2px solid #ffd3e2;border-radius:18px;padding:12px;text-align:center;transition:transform .2s,box-shadow .2s}
+.prod:hover{transform:translateY(-4px);box-shadow:0 10px 20px rgba(224,51,109,.15)}
+.prod img{width:140px;height:140px;object-fit:cover;border-radius:12px;background:#fff;box-shadow:0 4px 12px rgba(224,51,109,.1)}
+.prod h3{margin:8px 0 0;font:700 14px/1.25 var(--head);color:var(--ink);min-height:36px}
+.prod p{margin:4px 0 10px;font-weight:800;color:var(--deep)}
+.none{grid-column:1/-1;text-align:center;padding:40px;background:var(--card);border:2px dashed var(--line);border-radius:18px}
+/* panels + forms */
+.panel{background:rgba(255,255,255,.7);border-radius:22px;padding:22px}
+.panel h2{margin:0 0 12px;font:700 19px var(--head);color:var(--ink)}
+.panel label.f{display:block;font-weight:700;font-size:13.5px;color:var(--ink);margin-bottom:10px}
+.panel input[type=text],.panel input[type=email],.panel input[type=date],.panel select,.panel textarea{display:block;width:100%;margin-top:4px;padding:10px 13px;border-radius:10px;border:2px solid var(--line);background:#fff}
+.panel textarea{min-height:110px;resize:vertical}
+.err{color:#c4123f;font-size:12.5px;min-height:18px;display:block;font-weight:600}
+/* checkout */
+.cog{display:grid;grid-template-columns:1fr 1fr 1fr 230px;gap:16px;margin-top:16px;align-items:start}
+.sl{display:grid;grid-template-columns:1fr auto auto;gap:8px 10px;align-items:center;padding:10px 0;border-bottom:1px solid #ffe0ea}
+.sl small{color:var(--mut);display:block}
+.q{display:inline-flex;align-items:center;gap:8px}
+.q button{width:26px;height:26px;border-radius:50%;border:2px solid var(--pink);background:#fff;color:var(--pink);font-weight:800;cursor:pointer;line-height:1}
+.row{display:flex;justify-content:space-between;padding:6px 0}
+.row.t{font-weight:800;font-size:18px;color:var(--ink);border-top:2px dashed #ffd3e2;margin-top:8px;padding-top:10px}
+.pay{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:10px;cursor:pointer}
+.pay:has(input:checked){border-color:var(--pink);background:#fff3f7}
+.pay input{margin-top:5px;accent-color:var(--pink)}
+.pay b{display:block;color:var(--ink)}.pay small{color:var(--mut)}
+.warn{background:#fff3d6;border:1px solid #f0cf86;border-radius:10px;padding:10px 12px;font-size:13px;color:#7a5a00;margin-bottom:12px}
+.total{font:800 38px var(--head);color:var(--pink)}
+.bubble{display:inline-block;background:#fff;border:3px solid #ffd3e2;border-radius:50%;padding:14px 12px;font:800 15px/1.1 var(--head);color:var(--deep);transform:rotate(-8deg);margin-top:14px}
+/* confirmed */
+.done{max-width:620px;margin:40px auto 0;text-align:center}
+.tick{width:84px;height:84px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:44px;margin:0 auto 8px;box-shadow:0 0 0 10px #ffd3e2}
+.ref{display:inline-block;background:#fff;border:2px solid #ffd3e2;border-radius:16px;padding:6px 26px;margin:14px 0}
+.ref small{display:block;color:#fff;background:var(--pink);border-radius:99px;padding:0 14px;font-weight:700}
+.ref b{font:800 24px var(--head);color:var(--deep);letter-spacing:.04em}
+.det{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;background:rgba(255,255,255,.75);border-radius:18px;padding:18px;margin-bottom:18px}
+.det small{color:var(--mut);display:block;font-size:12.5px}.det b{color:var(--ink)}
+/* about / contact / stores */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center;margin-top:20px}
+.shop{border-radius:22px;border:4px solid #fff;box-shadow:0 10px 26px rgba(224,51,109,.2);overflow:hidden;position:relative}
+.shop svg{display:block;width:100%}
+.stamp{position:absolute;left:12px;bottom:12px;background:#fff;color:var(--deep);border-radius:50%;width:100px;height:100px;display:grid;place-items:center;text-align:center;font:800 14px/1.1 var(--head);transform:rotate(-12deg);border:3px solid #ffd3e2}
+.about p{margin:0 0 14px}
+.vals{display:flex;gap:26px;margin-top:20px;flex-wrap:wrap}
+.vals div{text-align:center;font-weight:700;font-size:13.5px;color:var(--ink)}
+.vals i{width:58px;height:58px;margin:0 auto 4px;font-size:26px}
+.cgrid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:20px}
+.info{display:grid;gap:14px}
+.info div{display:flex;gap:14px;align-items:flex-start;font-size:14.5px}
+.info i{width:36px;height:36px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-style:normal;flex:none}
+.soc{display:flex;gap:10px;margin-top:6px}
+.soc a{width:38px;height:38px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+.stores{display:grid;gap:12px;margin-top:18px}
+.st{display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:center;background:rgba(255,255,255,.75);border:2px solid transparent;border-radius:16px;padding:10px 16px 10px 10px}
+.st.on{border-color:var(--pink)}
+.st svg{width:96px;height:70px;border-radius:10px;display:block}
+.st b{color:var(--ink);font-size:16px}.st small{display:block;color:var(--mut)}
+.olist .st{grid-template-columns:1fr auto}
+/* drawer + toast */
+#shade{position:fixed;inset:0;background:rgba(122,35,70,.4);opacity:0;pointer-events:none;transition:.25s;z-index:40}
+#shade.on{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);background:#fff7fa;z-index:50;transform:translateX(105%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(122,35,70,.2)}
+#drawer.on{transform:none}
+.dh{padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.dh h2{margin:0;font:800 24px var(--head);color:var(--pink)}
+#items{flex:1;overflow:auto;padding:0 20px}
+.li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 0;border-bottom:2px dashed #ffd3e2}
+.li .q{grid-column:1/-1;margin-top:4px}
+.rm{border:0;background:none;color:var(--mut);font-size:12.5px;margin-left:auto;text-decoration:underline;cursor:pointer}
+.cf{padding:16px 20px;border-top:2px solid #ffd3e2}
+.tot{display:flex;justify-content:space-between;font:800 22px var(--head);color:var(--ink);margin-bottom:12px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:11px 22px;border-radius:99px;opacity:0;pointer-events:none;transition:.3s;z-index:60;font-weight:700;max-width:92vw;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%)}
+@media(max-width:1000px){.cog{grid-template-columns:1fr 1fr}}
+@media(max-width:860px){
+ header.top .wrap{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:8px;gap:8px}
+ nav.main{order:3;width:100%;justify-content:center;margin:0;flex-wrap:wrap}.tools{margin-left:auto}
+ .hero,.about,.cgrid,.mgrid,.cog{grid-template-columns:1fr}
+ .art{height:300px}.art img{height:280px}.perks{grid-template-columns:1fr 1fr}
+ .side{display:flex;overflow-x:auto}.side button{white-space:nowrap}
+ .st{grid-template-columns:70px 1fr}.st .btn{grid-column:1/-1}.st svg{width:70px;height:54px}
+ .det{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+ <div class="wrap">
+  <a class="brand" href="#home" aria-label="MOMOYO home"><img src="momoyo_logo.jpg" alt="MOMOYO Logo" onerror="this.style.display='none'"><span><b>MOMOYO</b><small>Japanese Milk Tea &amp; Desserts</small></span></a>
+  <nav class="main" aria-label="Main"><a href="#home" data-p="home">Home</a><a href="#menu" data-p="menu">Menu</a><a href="#about" data-p="about">About Us</a><a href="#contact" data-p="contact">Contact Us</a></nav>
+  <div class="tools"><button id="sbtn" aria-label="Search menu">🔍</button><button id="cbtn" aria-label="Open cart">🛒<span class="cnt" id="cnt">0</span></button></div>
+ </div>
+ <div id="sbar"><div class="wrap"><input id="q" type="search" placeholder="Search drinks and desserts, e.g. taro" aria-label="Search menu"></div></div>
+</header>
+
+<main>
+<section class="page" id="home"><div class="wrap">
+ <span class="petal" style="left:-6px;top:10px">🌸</span><span class="petal" style="right:10px;top:40px;animation-delay:1.5s">🌸</span>
+ <div class="hero">
+  <div>
+   <h1>Delight In Every Bite,<br><span>Joy In Every Vibe</span></h1>
+   <div class="tag">Authentic Japanese Milk Tea &amp; Desserts</div>
+   <p class="orig">📍 Originally from Indonesia 🇮🇩</p>
+   <a class="btn" href="#menu">Order Now →</a>
+  </div>
+  <div class="art">
+   <img src="momo-ice-cream-original.webp" alt="MOMOYO signature treats" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22380%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffe3ec%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%237a2346%22 font-family=%22Baloo 2%22 font-size=%2220%22%3EMOMOYO%3C/text%3E%3C/svg%3E'">
+   <div class="badge">Good<br>Drinks<br>Good Vibes<br>MOMOYO</div>
+  </div>
+ </div>
+ <div class="perks"><div class="perk"><i>🌸</i>Premium<br>Ingredients</div><div class="perk"><i>🥤</i>Japanese<br>Flavors</div><div class="perk"><i>🍓</i>Freshly<br>Made</div><div class="perk"><i>❤️</i>Always<br>With Love</div></div>
+</div></section>
+
+<section class="page" id="menu"><div class="wrap">
+ <div class="ttl"><h1>Our Menu</h1><p>Freshly made. Always a good idea. ♡</p></div>
+ <div class="mgrid"><nav class="side" id="side" aria-label="Menu categories"></nav><div><div class="mh"><h2 id="mt"></h2></div><div class="pgrid" id="pg"></div></div></div>
+</div></section>
+
+<section class="page" id="checkout"><div class="wrap">
+ <div class="ttl"><h1>Checkout</h1><p>Complete your order and choose your pickup details.</p></div>
+ <div id="coBody"></div>
+</div></section>
+
+<section class="page" id="confirmed"><div class="wrap" id="confBody"></div></section>
+
+<section class="page" id="orders"><div class="wrap">
+ <div class="ttl"><h1>My Orders</h1><p>Orders placed on this device.</p></div>
+ <div class="stores olist" id="olist"></div>
+</div></section>
+
+<section class="page" id="stores"><div class="wrap">
+ <div class="ttl"><h1>Store Locations</h1><p>Pick up your order from one of our branches.</p></div>
+ <div class="stores" id="slist"></div>
+</div></section>
+
+<section class="page" id="about"><div class="wrap">
+ <div class="ttl"><h1>About Us</h1><p>More than just a drink, it’s a happy moment.</p></div>
+ <div class="about">
+  <div class="shop">
+   <svg viewBox="0 0 480 300" role="img" aria-label="Illustration of the pink MOMOYO shop"><rect width="480" height="300" fill="#ffc9dc"/><rect y="210" width="480" height="90" fill="#ffb0cb"/>
+    <rect x="30" y="30" width="420" height="60" rx="14" fill="#fff"/><text x="240" y="72" text-anchor="middle" font-family="Baloo 2,Trebuchet MS,sans-serif" font-weight="800" font-size="40" fill="#ff5d8f" stroke="#e0336d">MOMOYO</text>
+    <rect x="30" y="110" width="420" height="90" rx="10" fill="#fff4f8"/><rect x="50" y="125" width="90" height="55" rx="8" fill="#ffd9e6"/><rect x="195" y="125" width="90" height="55" rx="8" fill="#ffe6a8"/><rect x="340" y="125" width="90" height="55" rx="8" fill="#d9ccff"/>
+    <rect x="20" y="198" width="440" height="26" rx="8" fill="#ff7fa8"/><use href="#bear" x="190" y="150" width="100" height="100"/></svg>
+   <div class="stamp">From<br>Indonesia<br>With Love</div>
+  </div>
+  <div>
+   <p>MOMOYO is a Japanese milk tea and dessert brand that brings happiness in every cup and bite. We started with a simple dream: to share delicious, high-quality drinks and desserts that make everyday moments a little sweeter.</p>
+   <p>Originally from Indonesia, MOMOYO brings authentic Japanese milk tea flavors with creative desserts made fresh daily.</p>
+   <div class="vals"><div><i>🌸</i>High Quality<br>Ingredients</div><div><i>❤️</i>Made<br>with Love</div><div><i>😊</i>Bringing<br>Happiness</div></div>
+  </div>
+ </div>
+</div></section>
+
+<section class="page" id="contact"><div class="wrap">
+ <div class="ttl"><h1>Contact Us</h1><p>We’d love to hear from you!</p></div>
+ <div class="cgrid">
+  <form class="panel" id="cf" novalidate>
+   <h2>✉️ Send us a message</h2>
+   <label class="f">Name<input type="text" name="name" maxlength="60" autocomplete="name" placeholder="Juan Dela Cruz"><span class="err"></span></label>
+   <label class="f">Email<input type="email" name="email" maxlength="80" autocomplete="email" placeholder="you@example.com"><span class="err"></span></label>
+   <label class="f">Subject<select name="subject"><option value="">Choose a subject</option><option>General Inquiry</option><option>Order question</option><option>Feedback</option><option>Franchise inquiry</option></select><span class="err"></span></label>
+   <label class="f">Message<textarea name="message" maxlength="600" placeholder="Type your message here..."></textarea><span class="err"></span></label>
+   <button class="btn full" type="submit">Send Message ➤</button>
+  </form>
+  <div class="panel">
+   <h2>Get in Touch</h2>
+   <div class="info"><div><i>📞</i>+63 918 345 6789</div><div><i>✉</i>hello@momoyo.ph</div><div><i>📍</i>123 Gourmet St.<br>Baguio City, Philippines</div><div><i>🕙</i>Open Daily<br>10:00 AM – 10:00 PM</div></div>
+   <h2 style="margin-top:20px">Follow Us</h2>
+   <div class="soc"><a href="#contact" aria-label="Facebook">f</a><a href="#contact" aria-label="Instagram">ig</a><a href="#contact" aria-label="TikTok">tt</a><a href="#contact" aria-label="YouTube">▶</a></div>
+   <p style="margin-top:14px"><a href="#stores" style="color:var(--deep);font-weight:700;text-decoration:underline">See store locations →</a></p>
+  </div>
+ </div>
+</div></section>
+</main>
+
+<div id="shade"></div>
+<aside id="drawer" aria-label="Cart" aria-hidden="true">
+ <div class="dh"><h2>Your Cart 🛒</h2><button id="cx" aria-label="Close cart" style="all:unset;cursor:pointer;font-size:22px">✕</button></div>
+ <div id="items"></div>
+ <div class="cf"><div class="tot"><span>Total</span><span id="tot">₱0</span></div><button class="btn full" id="co">Checkout</button></div>
+</aside>
+<div id="toast" role="status"></div>
+
+<script>
+/* ============ data ============ */
+const IMG={ice:'momo-ice-cream-original.webp',milk:'super-milk-tea.webp',fruit:'fresh-lemon-black-tea.webp',coffee:'iced-americano.webp',jumbo:'jumbo-milk-tea.webp',waffle:'egg-waffle-original.webp',yo:'yoflip-mango.webp',baby:'baby-yoflip-chocolate.webp',choco:'chocobara.webp',water:'watermelon-juice.webp',pud:'pudding-sundae.webp',pas:'egg-tart.webp'};
+const CATS=[
+ {id:'ice',n:'Ice Cream',e:'🍦'},
+ {id:'milk',n:'Milk Tea',e:'🧋'},
+ {id:'fruit',n:'Fruit Tea',e:'🍹'},
+ {id:'coffee',n:'Coffee',e:'☕'},
+ {id:'jumbo',n:'Jumbo Series',e:'🥤'},
+ {id:'waffle',n:'Egg Waffle',e:'🧇'},
+ {id:'yo',n:'Yo!Flip Series',e:'🍧'},
+ {id:'baby',n:'Baby Yo!Flip Series',e:'🍨'},
+ {id:'choco',n:'Choco Bestie Series',e:'🍫'},
+ {id:'water',n:'Watermelon Series',e:'🍉'},
+ {id:'pud',n:'Pudding Series',e:'🍮'},
+ {id:'pas',n:'MOMOYO Pastries',e:'🥟'}
+];
+const PRODUCTS=[
+ {n:'MOMO Ice Cream Original',p:79,cat:'ice',img:'momo-ice-cream-original.webp'},
+ {n:'Choco Ice Cream Cone',p:79,cat:'ice',img:'choco-ice-cream-cone.webp'},
+ {n:'Matcha Ice Cream Cone',p:79,cat:'ice',img:'matcha-ice-cream-cone.webp'},
+ {n:'Choco Mix Ice Cream Cone',p:89,cat:'ice',img:'choco-mix-ice-cream-cone.webp'},
+ {n:'Super Milk Tea',p:99,cat:'milk',img:'super-milk-tea.webp'},
+ {n:'Brown Sugar Boba Milk Tea',p:109,cat:'milk',img:'brown-sugar-boba-milk-tea.webp'},
+ {n:'Oreo Milk Tea',p:109,cat:'milk',img:'oreo-milk-tea.webp'},
+ {n:'Choco Ice Cream Milk Tea',p:119,cat:'milk',img:'choco-ice-cream-milk-tea.webp'},
+ {n:'Pudding Boba Milk Tea',p:109,cat:'milk',img:'pudding-boba-milk-tea.webp'},
+ {n:'Fresh Lemon Black Tea',p:89,cat:'fruit',img:'fresh-lemon-black-tea.webp'},
+ {n:'Fresh Lemon Green Tea',p:89,cat:'fruit',img:'fresh-lemon-green-tea.webp'},
+ {n:'Fresh Squeezed Lemonade',p:89,cat:'fruit',img:'fresh-squeezed-lemonade.webp'},
+ {n:'Mango Juice',p:89,cat:'fruit',img:'mango-juice.webp'},
+ {n:'Watermelon Juice',p:89,cat:'fruit',img:'watermelon-juice.webp'},
+ {n:'Iced Americano',p:89,cat:'coffee',img:'iced-americano.webp'},
+ {n:'Iced Coconut Latte',p:109,cat:'coffee',img:'iced-coconut-latte.webp'},
+ {n:'Iced Oreo Latte',p:119,cat:'coffee',img:'iced-oreo-latte.webp'},
+ {n:'Iced Coffee Float',p:129,cat:'coffee',img:'iced-coffee-float.webp'},
+ {n:'Iced Mocha Smoothie',p:129,cat:'coffee',img:'iced-mocha-smoothie.webp'},
+ {n:'Affogato',p:129,cat:'coffee',img:'affogato.webp'},
+ {n:'Jumbo Milk Tea',p:129,cat:'jumbo',img:'jumbo-milk-tea.webp'},
+ {n:'Jumbo Fruit Tea',p:129,cat:'jumbo',img:'jumbo-fruit-tea.webp'},
+ {n:'Jumbo Pudding Milk Tea',p:139,cat:'jumbo',img:'jumbo-pudding-milk-tea.webp'},
+ {n:'Egg Waffle Original',p:109,cat:'waffle',img:'egg-waffle-original.webp'},
+ {n:'Egg Waffle Chocolate',p:119,cat:'waffle',img:'egg-waffle-chocolate.webp'},
+ {n:'Egg Waffle Strawberry',p:119,cat:'waffle',img:'egg-waffle-strawberry.webp'},
+ {n:'Egg Waffle Mango',p:119,cat:'waffle',img:'egg-waffle-mango.webp'},
+ {n:'Egg Waffle Oreo',p:129,cat:'waffle',img:'egg-waffle-oreo.webp'},
+ {n:'Yo!Flip Mango',p:99,cat:'yo',img:'yoflip-mango.webp'},
+ {n:'Yo!Flip Peach',p:99,cat:'yo',img:'yoflip-peach.webp'},
+ {n:'Yo!Flip Strawberry',p:99,cat:'yo',img:'yoflip-strawberry.webp'},
+ {n:'Yo!Flip Oreo',p:109,cat:'yo',img:'yoflip-oreo.webp'},
+ {n:'Baby Yo!Flip Chocolate',p:89,cat:'baby',img:'baby-yoflip-chocolate.webp'},
+ {n:'Baby Yo!Flip Mango',p:89,cat:'baby',img:'baby-yoflip-mango.webp'},
+ {n:'Baby Yo!Flip Oreo',p:99,cat:'baby',img:'baby-yoflip-oreo.webp'},
+ {n:'Baby Yo!Flip Strawberry',p:89,cat:'baby',img:'baby-yoflip-strawberry.webp'},
+ {n:'Chocobara',p:109,cat:'choco',img:'chocobara.webp'},
+ {n:'Watermelon Juice',p:99,cat:'water',img:'watermelon-juice.webp'},
+ {n:'Watermelon Milk',p:109,cat:'water',img:'watermelon-milk.webp'},
+ {n:'Watermelon Smoothie',p:119,cat:'water',img:'watermelon-smoothie.webp'},
+ {n:'Milky Mango Pudding',p:89,cat:'pud',img:'milky-mango-pudding.webp'},
+ {n:'Pudding Sundae',p:99,cat:'pud',img:'pudding-sundae.webp'},
+ {n:'Choco Pudding Sundae',p:109,cat:'pud',img:'choco-pudding-sundae.webp'},
+ {n:'Egg Tart',p:79,cat:'pas',img:'egg-tart.webp'},
+ {n:'Donut Sugar Glaze',p:69,cat:'pas',img:'donut-sugar-glaze.webp'},
+ {n:'Donut Chocolate Sprinkles',p:79,cat:'pas',img:'donut-chocolate-sprinkles.webp'},
+ {n:'Donut Strawberry',p:79,cat:'pas',img:'donut-strawberry.webp'},
+ {n:'Donut Oreo',p:89,cat:'pas',img:'donut-oreo.webp'},
+ {n:'Donut Matcha',p:89,cat:'pas',img:'donut-matcha.webp'},
+ {n:'Donut Peanut Butter',p:89,cat:'pas',img:'donut-peanut-butter.webp'},
+ {n:'Donut Rainbow',p:89,cat:'pas',img:'donut-rainbow.webp'},
+ {n:'Donut Almond',p:89,cat:'pas',img:'donut-almond.webp'},
+ {n:'Donut Magnum',p:99,cat:'pas',img:'donut-magnum.webp'},
+ {n:'Donut White Oreo',p:99,cat:'pas',img:'donut-white-oreo.webp'},
+ {n:'Donut Chocolate Crunch',p:99,cat:'pas',img:'donut-chocolate-crunch.webp'},
+ {n:'Donut Chocolate Dirty',p:99,cat:'pas',img:'donut-chocolate-dirty.webp'}
+];
+const STORES=[
+ {id:'lanang',n:'SM Lanang Premier',a:'J.P. Laurel Ave, Lanang, Davao City',h:'10:00 AM – 09:00 PM',c:'#ffb0cb'},
+ {id:'abreeza',n:'Abreeza Mall',a:'J.P. Laurel Ave, Bajada, Davao City',h:'10:00 AM – 09:00 PM',c:'#d9ccff'},
+ {id:'gaisano',n:'Gaisano Mall of Davao',a:'J.P. Laurel Ave, Bajada, Davao City',h:'10:00 AM – 09:00 PM',c:'#ffe6a8'},
+ {id:'smdavao',n:'SM City Davao',a:'Quimpo Blvd, Ecoland, Davao City',h:'10:00 AM – 09:00 PM',c:'#bfe3f5'}
+];
+const PAY=[['gcash','GCash','Pay securely with your GCash account.',1],['maya','Maya','Pay with Maya for a fast and easy checkout.',1],['card','Credit / Debit Card','Visa, Mastercard, JCB (via payment gateway).',1],['cash','Cash on Pickup','Pay at the store when you collect your order.',0]];
+
+/* ============ helpers ============ */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const peso=n=>'₱'+n.toLocaleString('en-PH');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const iso=d=>d.toLocaleDateString('en-CA');
+const nice=s=>new Date(s+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+
+/* ============ state ============ */
+let cart=load('momoyo-cart',[]).filter(l=>l&&typeof l.n==='string'&&l.p>0&&l.q>0);
+let orders=load('momoyo-orders',[]);
+const CO={name:'',phone:'',store:'lanang',date:iso(new Date()),time:'',note:'',pay:'cash'};
+let cat='ice',query='',lastOrder=null;
+const total=()=>cart.reduce((s,l)=>s+l.p*l.q,0);
+
+/* ============ router ============ */
+function route(){
+ const p=location.hash.slice(1)||'home';
+ const page=['home','menu','checkout','confirmed','orders','stores','about','contact'].includes(p)?p:'home';
+ $$('.page').forEach(s=>s.classList.toggle('on',s.id===page));
+ $$('nav.main a').forEach(a=>a.classList.toggle('on',a.dataset.p===page));
+ if(page==='checkout')renderCheckout();
+ if(page==='confirmed')renderConfirmed();
+ if(page==='orders')renderOrders();
+ if(page==='stores')renderStores();
+ scrollTo(0,0);
+}
+addEventListener('hashchange',route);
+
+/* ============ menu ============ */
+function menu(){
+ $('#side').innerHTML=CATS.map(c=>`<button data-c="${c.id}" class="${!query&&c.id===cat?'on':''}"><span>${c.e}</span>${c.n}</button>`).join('');
+ let list,title;
+ if(query){title=`Results for “${esc(query)}”`;list=PRODUCTS.filter(x=>x.n.toLowerCase().includes(query.toLowerCase()))}
+ else{const c=CATS.find(x=>x.id===cat);title=c.n;list=PRODUCTS.filter(x=>x.cat===cat)}
+ $('#mt').innerHTML=title;
+ $('#pg').innerHTML=list.length?list.map(x=>`<article class="prod"><img src="${x.img}" alt="${x.n}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffd3e2%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%237a2346%22 font-size=%2212%22%3EMOMOYO%3C/text%3E%3C/svg%3E'"><h3>${x.n}</h3><p>${peso(x.p)}</p><button class="btn sm" data-add="${x.n}" data-p="${x.p}">Add to Cart</button></article>`).join(''):`<div class="none">No matches. Try another word.</div>`;
+}
+$('#side').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(b){cat=b.dataset.c;query='';$('#q').value='';menu()}});
+$('#pg').addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(b)add(b.dataset.add,+b.dataset.p)});
+$('#sbtn').onclick=()=>{$('#sbar').classList.toggle('on');if($('#sbar').classList.contains('on'))$('#q').focus()};
+$('#q').addEventListener('input',e=>{query=e.target.value.trim();if(location.hash!=='#menu')location.hash='#menu';menu()});
+
+/* ============ cart ============ */
+function add(n,p){const l=cart.find(x=>x.n===n);l?l.q++:cart.push({n,p,q:1});save('momoyo-cart',cart);drawCart();toast(`${n} added 💕`)}
+function change(i,d){cart[i].q+=d;if(cart[i].q<1)cart.splice(i,1);save('momoyo-cart',cart);drawCart();if(location.hash==='#checkout')renderCheckout()}
+function drawCart(){
+ $('#cnt').textContent=cart.reduce((s,l)=>s+l.q,0);$('#tot').textContent=peso(total());
+ $('#items').innerHTML=cart.length?cart.map((l,i)=>`<div class="li"><b>${l.n}</b><b>${peso(l.p*l.q)}</b><div class="q"><button data-i="${i}" data-d="-1" aria-label="Less">−</button>${l.q}<button data-i="${i}" data-d="1" aria-label="More">+</button><button class="rm" data-rm="${i}">Remove</button></div></div>`).join(''):`<p style="text-align:center;padding:40px 0;color:var(--mut)">Your cart is empty.<br>Add something yummy! 🧋</p>`;
+ $('#co').disabled=!cart.length;
+}
+$('#items').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.d)change(+b.dataset.i,+b.dataset.d);if(b.dataset.rm){cart.splice(+b.dataset.rm,1);save('momoyo-cart',cart);drawCart()}});
+const openCart=o=>{$('#drawer').classList.toggle('on',o);$('#shade').classList.toggle('on',o);$('#drawer').setAttribute('aria-hidden',!o)};
+$('#cbtn').onclick=()=>openCart(true);$('#cx').onclick=()=>openCart(false);$('#shade').onclick=()=>openCart(false);
+addEventListener('keydown',e=>{if(e.key==='Escape')openCart(false)});
+$('#co').onclick=()=>{openCart(false);location.hash='#checkout'};
+
+/* ============ checkout ============ */
+function slots(){const o=[];for(let h=10;h<21;h++){const f=x=>`${(x%12)||12}:00 ${x<12?'AM':'PM'}`;o.push(`${f(h)} - ${f(h+1)}`)}return o}
+function renderCheckout(){
+ if(!cart.length){$('#coBody').innerHTML=`<div class="panel" style="text-align:center;margin-top:20px"><p>Your cart is empty.</p><a class="btn" href="#menu">Browse the menu</a></div>`;return}
+ const n=cart.reduce((s,l)=>s+l.q,0),pay=PAY.find(p=>p[0]===CO.pay),blocked=pay[3];
+ $('#coBody').innerHTML=`<form id="cof" class="cog" novalidate>
+ <div class="panel"><h2>1. Order Summary</h2><small style="color:var(--mut)">${n} item${n>1?'s':''}</small>
+  ${cart.map((l,i)=>`<div class="sl"><div><b>${l.n}</b><small>${peso(l.p)}</small></div><div class="q"><button type="button" data-i="${i}" data-d="-1" aria-label="Less">−</button>${l.q}<button type="button" data-i="${i}" data-d="1" aria-label="More">+</button></div><b>${peso(l.p*l.q)}</b></div>`).join('')}
+  <div class="row"><span>Subtotal</span><span>${peso(total())}</span></div><div class="row"><span>Delivery / Pickup Fee</span><span>₱0</span></div><div class="row t"><span>Total</span><span>${peso(total())}</span></div></div>
+ <div class="panel"><h2>2. Pickup Details (Pre-Order)</h2>
+  <label class="f">Full Name *<input type="text" name="name" maxlength="60" value="${esc(CO.name)}" placeholder="Juan Dela Cruz" autocomplete="name"><span class="err"></span></label>
+  <label class="f">Contact Number *<input type="text" name="phone" maxlength="13" value="${esc(CO.phone)}" placeholder="09XX XXX XXXX" inputmode="tel" autocomplete="tel"><span class="err"></span></label>
+  <label class="f">Store Location (Davao) *<select name="store">${STORES.map(s=>`<option value="${s.id}" ${CO.store===s.id?'selected':''}>${s.n}</option>`).join('')}</select></label>
+  <label class="f">Pickup Date *<input type="date" name="date" min="${iso(new Date())}" value="${CO.date}"><span class="err"></span></label>
+  <label class="f">Pickup Time *<select name="time"><option value="">Choose a time</option>${slots().map(t=>`<option ${CO.time===t?'selected':''}>${t}</option>`).join('')}</select><span class="err"></span></label>
+  <label class="f">Order Note (Optional)<textarea name="note" maxlength="200" style="min-height:70px" placeholder="E.g. Less ice, extra pearls">${esc(CO.note)}</textarea></label></div>
+ <div class="panel"><h2>3. Payment Method</h2>
+  ${PAY.map(p=>`<label class="pay"><input type="radio" name="pay" value="${p[0]}" ${CO.pay===p[0]?'checked':''}><span><b>${p[1]}</b><small>${p[2]}</small></span></label>`).join('')}
+  ${blocked?`<div class="warn" role="alert">Online payments are currently not available for this store. Please select <b>Cash on Pickup</b> or try again later.</div>`:''}
+  <button class="btn full" type="submit" ${blocked?'disabled':''}>Place Order ➤</button></div>
+ <div class="panel"><h2>Order Total</h2><div class="total">${peso(total())}</div><p style="font-size:13.5px">You’re all set! We’ll prepare your order for pickup.</p><div class="bubble">Thank<br>you!</div></div></form>`;
+}
+$('#coBody').addEventListener('click',e=>{const b=e.target.closest('button[data-d]');if(b){sync();change(+b.dataset.i,+b.dataset.d)}});
+function sync(){const f=$('#cof');if(!f)return;['name','phone','store','date','time','note'].forEach(k=>CO[k]=f[k].value);CO.pay=f.pay.value||CO.pay}
+$('#coBody').addEventListener('change',e=>{if(e.target.name==='pay'){sync();renderCheckout()}else sync()});
+$('#coBody').addEventListener('submit',e=>{
+ e.preventDefault();sync();const f=e.target;let ok=true;
+ const R={name:v=>v.trim().length>=2?'':'Please enter your full name.',phone:v=>/^09\d{9}$/.test(v.replace(/[\s-]/g,''))?'':'Enter an 11-digit number starting with 09.',date:v=>v&&v>=iso(new Date())?'':'Choose today or a later date.',time:v=>v?'':'Choose a pickup time.'};
+ for(const k in R){const m=R[k](f[k].value),s=f[k].parentElement.querySelector('.err');s.textContent=m;if(m)ok=false}
+ if(!ok){toast('Please fix the highlighted fields.');return}
+ if(PAY.find(p=>p[0]===CO.pay)[3])return;
+ const d=CO.date.replace(/-/g,''),seq=String(orders.filter(o=>o.ref.includes(d)).length+1).padStart(3,'0');
+ const o={ref:`MYO-${d}-${seq}`,name:CO.name.trim(),phone:CO.phone,store:CO.store,date:CO.date,time:CO.time,note:CO.note.trim(),total:total(),items:cart.map(l=>({...l}))};
+ orders.unshift(o);save('momoyo-orders',orders);lastOrder=o;cart=[];save('momoyo-cart',cart);drawCart();
+ CO.note='';CO.time='';location.hash='#confirmed';
+});
+
+/* ============ confirmed / orders / stores ============ */
+function renderConfirmed(){
+ const o=lastOrder||orders[0];
+ if(!o){$('#confBody').innerHTML=`<div class="done"><p>No recent order.</p><a class="btn" href="#menu">Order now</a></div>`;return}
+ const s=STORES.find(x=>x.id===o.store);
+ $('#confBody').innerHTML=`<div class="done"><div class="tick">✓</div><div class="ttl" style="padding:0"><h1>Order Confirmed!</h1></div>
+ <p>Thank you for choosing MOMOYO! Your order has been received.</p>
+ <div class="ref"><small>Order Reference No.</small><b>${esc(o.ref)}</b></div>
+ <div class="det"><div><small>📍 Pickup Location</small><b>${esc(s.n)}</b></div><div><small>📅 Pickup Date</small><b>${nice(o.date)}</b></div><div><small>🕙 Pickup Time</small><b>${esc(o.time)}</b></div><div><small>💰 Total (pay at pickup)</small><b>${peso(o.total)}</b></div></div>
+ <a class="btn full" href="#orders" style="margin-bottom:12px">View My Orders</a><a class="btn full ghost" href="#home">Back to Home</a></div>`;
+}
+function renderOrders(){
+ $('#olist').innerHTML=orders.length?orders.map(o=>`<div class="st"><div><b>${esc(o.ref)}</b><small>${nice(o.date)} · ${esc(o.time)} · ${esc(STORES.find(s=>s.id===o.store).n)}</small><small>${o.items.map(i=>`${i.q}× ${esc(i.n)}`).join(', ')}</small></div><b>${peso(o.total)}</b></div>`).join(''):`<div class="none">No orders yet. <a href="#menu" style="color:var(--deep);font-weight:700">Start one →</a></div>`;
+}
+function renderStores(){
+ $('#slist').innerHTML=STORES.map(s=>`<div class="st ${CO.store===s.id?'on':''}"><svg viewBox="0 0 96 70" role="img" aria-label="${s.n} storefront"><rect width="96" height="70" fill="${s.c}"/><rect y="48" width="96" height="22" fill="#fff" opacity=".4"/><rect x="14" y="14" width="68" height="14" rx="4" fill="#fff"/><rect x="14" y="32" width="68" height="26" rx="3" fill="#7a2346" opacity=".15"/><use href="#bear" x="36" y="30" width="26" height="26"/></svg><div><b>${s.n}</b><small>📍 ${s.a}</small><small>🕙 ${s.h}</small></div><button class="btn sm" style="width:auto;padding:8px 22px" data-s="${s.id}">${CO.store===s.id?'Selected ✓':'Select'}</button></div>`).join('');
+}
+$('#slist').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;CO.store=b.dataset.s;renderStores();toast(`${STORES.find(s=>s.id===CO.store).n} selected for pickup`)});
+
+/* ============ contact form ============ */
+$('#cf').addEventListener('submit',e=>{
+ e.preventDefault();const f=e.target;let ok=true;
+ const R={name:v=>v.trim()?'':'Please enter your name.',email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)?'':'Please enter a valid email.',subject:v=>v?'':'Please choose a subject.',message:v=>v.trim().length>=5?'':'Please write a short message.'};
+ for(const k in R){const m=R[k](f[k].value);f[k].parentElement.querySelector('.err').textContent=m;if(m)ok=false}
+ if(ok){f.reset();toast('Message sent (demo). Thank you! 💌')}
+});
+
+menu();drawCart();route();
+</script>
+</body>
+</html>
